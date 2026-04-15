@@ -1,16 +1,16 @@
-## Hi there 👋
+# edi
 
-<!--
-**ilovekgl/ilovekgl** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
-Here are some ideas to get you started:
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+mostly breaking things in c# and fixing them in c#, c and c++ :)
+
+
+
+- currently working on roblox revival backends.
+
+- interested in security, logic flaws and clean architecture.
+
+- if it has a rate limit, i'll probably find it.
+- learning typescript and javascript ( 85% done )
+
+
