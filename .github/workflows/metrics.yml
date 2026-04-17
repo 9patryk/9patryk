@@ -1,0 +1,95 @@
+name: Metrics
+on:
+  # Run every 6 hours
+  schedule: [{cron: "0 */6 * * *"}]
+  # Run on push
+  push: {branches: ["main"]}
+  # Run manually
+  workflow_dispatch:
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # GitHub token for API access
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Basic config
+          user: xscriptor
+          template: classic
+          base: "header, activity, community, repositories, metadata"
+
+          # Main metrics SVG
+          filename: metrics.svg
+
+          # Config
+          config_timezone: Europe/Bucharest
+          committer_message: "chore(metrics): update metrics"
+
+          # Plugins
+          plugin_achievements: yes
+          plugin_achievements_only: "docker,github-sponsor,maintainer"
+
+          plugin_calendar: yes
+          plugin_calendar_limit: 1
+
+          plugin_languages: yes
+          plugin_languages_limit: 10
+          plugin_languages_threshold: "0%"
+
+          plugin_lines: yes
+
+          plugin_repositories: yes
+          plugin_repositories_pinned: "xscriptor/vscode,xscriptor/terminal,xscriptor/jetbrains"
+          plugin_repositories_starred: no
+
+          plugin_traffic: yes
+
+      # Generate additional metrics variations
+      - uses: lowlighter/metrics@latest
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          user: xscriptor
+          template: classic
+          filename: metrics.repositories.svg
+          base: ""
+          plugin_repositories: yes
+          plugin_repositories_limit: 6
+          plugin_repositories_pinned: 0
+          plugin_repositories_affiliations: "owner"
+          config_timezone: Europe/Bucharest
+
+      - uses: lowlighter/metrics@latest
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          user: xscriptor
+          template: classic
+          filename: metrics.calendar.svg
+          base: ""
+          plugin_calendar: yes
+          plugin_calendar_limit: 1
+          config_timezone: Europe/Bucharest
+
+      - uses: lowlighter/metrics@latest
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          user: xscriptor
+          template: classic
+          filename: metrics.languages.svg
+          base: ""
+          plugin_languages: yes
+          plugin_languages_limit: 10
+          plugin_languages_threshold: "0%"
+          config_timezone: Europe/Bucharest
+
+      # Commit metrics back to repo
+      - name: Commit metrics
+        run: |
+          git config user.name "GitHub Metrics"
+          git config user.email "actions@github.com"
+          git add -A metrics*.svg
+          git commit -m "chore(metrics): update GitHub metrics" || exit 0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
