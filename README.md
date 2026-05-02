@@ -1,4 +1,4 @@
-# edi / kgl
+# patryk
 
 mostly breaking things in c# and fixing them in c#, c and c++ :)
 
@@ -16,12 +16,6 @@ mostly breaking things in c# and fixing them in c#, c and c++ :)
 
 <div align="center">
   <img src="./metrics.calendar.svg" alt="Contributions Calendar" />
-</div>
-
-## Featured Repositories
-
-<div align="center">
-  <img src="./metrics.repositories.svg" alt="Featured Repositories" />
 </div>
 
 ## Languages
